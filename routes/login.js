@@ -9,6 +9,12 @@ router.get('/', (req, res) => {
     res.sendFile(loginPath);
 });
 
+router.get('/login', (req, res) => {
+    const expensePath = path.join(__dirname, '..', 'views', 'add-expense.html');
+    res.sendFile(expensePath);
+});
+
+
 router.post('/', async (req, res) => {
     const { email, password } = req.body;
 
@@ -28,8 +34,9 @@ router.post('/', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (isMatch) {
-            // Passwords match, send a pop-up alert message
-            res.status(200).send('<script>alert("User login successful"); window.location.href = "/";</script>');
+            // Passwords match
+            // Redirect to add-expense.html after successful login
+            res.status(200).send('<script>alert("User login successful"); window.location.href = "/add-expense.html";</script>');
         } else {
             // Passwords don't match, send a pop-up alert message
             res.status(401).send('<script>alert("User not authorized"); window.location.href = "/login";</script>');

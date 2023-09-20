@@ -19,10 +19,12 @@ app.use((err, req, res, next) => {
 const indexRoute = require('./routes/index');
 const signupRoute = require('./routes/signup');
 const loginRoute = require('./routes/login');
+const expenseRoute = require('./routes/add-expense');
 
 app.use('/', indexRoute);
 app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
+app.use('/add-expense', expenseRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

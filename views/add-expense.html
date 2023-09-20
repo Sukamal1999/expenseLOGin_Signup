@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    <!-- Include your CSS file here -->
+</head>
+<body>
+    <h1>Add Expense</h1>
+    
+    <!-- Expense Form -->
+    <form id="expenseForm">
+        <div>
+            <label for="amount">Choose Expense Amount:</label>
+            <input type="number" id="amount" name="amount" required>
+        </div>
+        <div>
+            <label for="description">Choose Description:</label>
+            <input type="text" id="description" name="description" required>
+        </div>
+        <div>
+            <label for="category">Choose a Category:</label>
+            <select id="category" name="category">
+                <option value="food">Food</option>
+                <option value="movie">Movie</option>
+                <option value="travel">Travel</option>
+                <option value="shopping">Shopping</option>
+            </select>
+        </div>
+        <button type="submit">Add Expense</button>
+    </form>
+
+    <!-- Display Expenses -->
+    <h2>Expenses:</h2>
+    <ul id="expensesList"></ul>
+
+    <script>
+        const expenseForm = document.getElementById('expenseForm');
+        const expensesList = document.getElementById('expensesList');
+
+        // Event listener for the form submission
+        expenseForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const amount = document.getElementById('amount').value;
+            const description = document.getElementById('description').value;
+            const category = document.getElementById('category').value;
+
+            // Create a new list item to display the expense
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `${amount} - ${category} - ${description}`;
+            
+            // Add a delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', function () {
+                expensesList.removeChild(listItem);
+            });
+            listItem.appendChild(deleteButton);
+
+            // Add the new expense to the list
+            expensesList.appendChild(listItem);
+
+            // Clear the form inputs
+            expenseForm.reset();
+        });
+    </script>
+</body>
+</html>
